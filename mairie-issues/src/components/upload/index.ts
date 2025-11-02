@@ -1,0 +1,1 @@
+export { PhotoDropzone } from './PhotoDropzone';
