@@ -14,7 +14,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { LocationPicker } from '@/components/map/LocationPicker';
 import { PhotoDropzone } from '@/components/upload/PhotoDropzone';
-import type { Location } from '@/lib/types';
+import type { Location, ReportUrgency } from '@/lib/types';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 
 export function ReportPage() {
   const { user } = useAuth();
@@ -47,6 +49,7 @@ export function ReportPage() {
             description: data.description,
             photoFile: data.photoFile,
             location: data.location,
+            urgency: data.urgency,
           },
           user.id
         );
@@ -176,6 +179,28 @@ export function ReportPage() {
               />
               {errors.description && (
                 <p className="text-sm text-destructive mt-1">{errors.description.message}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="urgency">
+                Urgency Level <span className="text-destructive">*</span>
+              </Label>
+              <Select
+                defaultValue=""
+                onValueChange={(value) => setValue('urgency', value as ReportUrgency)}
+                disabled={isSubmitting}
+              >
+                <SelectTrigger id="urgency" className="mt-1.5">
+                  <SelectValue placeholder="Select urgency level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="low">Low - Not time sensitive</SelectItem>
+                  <SelectItem value="medium">Medium - Needs attention</SelectItem>
+                  <SelectItem value="high">High - Urgent safety concern</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.urgency && (
+                <p className="text-sm text-destructive mt-1">{errors.urgency.message}</p>
               )}
             </div>
           </CardContent>

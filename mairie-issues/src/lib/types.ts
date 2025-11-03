@@ -46,15 +46,19 @@ export type AuthResponse = {
   token?: string;
 };
 
+export type ReportUrgency = 'low' | 'medium' | 'high';
+
 // Form types
 export type CreateReportInput = {
   title: string;
   description?: string;
   photoFile: File;
   location: Location;
+  urgency: ReportUrgency;
 };
 
 export type SendMessageInput = {
   reportId: string;
   text: string;
 };
+
