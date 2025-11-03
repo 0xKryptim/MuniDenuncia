@@ -15,3 +15,6 @@ integrantes
 ## Para ingresar con usuario mock-up
 - cp .env.example .env
 - npm run dev
+- ingresar con credenciales:
+  - correo: user@example.com
+  - clave: password123
