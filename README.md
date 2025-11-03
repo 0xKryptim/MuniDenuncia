@@ -8,7 +8,7 @@ integrantes
 
 ## Para correr el proyecto
 - clonar repo
-- cd MuniDenuncia/marie-issues
+- cd MuniDenuncia/mairie-issues
 - npm install
 - npm run dev
 
