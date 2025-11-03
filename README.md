@@ -1,5 +1,6 @@
 # MuniDenuncia
 proyecto INF322 2025-2
+
 integrantes
 - Timothé Tavernier
 - Méline Gendrot 
