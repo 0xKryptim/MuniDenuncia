@@ -16,5 +16,5 @@ integrantes
 - cp .env.example .env
 - npm run dev
 - ingresar con credenciales:
-  - correo: user@example.com
+  - correo: usuario@ejemplo.cl
   - clave: password123
