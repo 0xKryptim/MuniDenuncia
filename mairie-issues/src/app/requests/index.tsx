@@ -10,6 +10,10 @@ import { Input } from '@/components/ui/input';
 import { StatusChip } from '@/components/reports/StatusChip';
 import type { Report, ReportStatus } from '@/lib/types';
 
+import luminariaImg from '../../assets/lampadaire.jpg';
+import NidPoulImg from '../../assets/des-nids-de-poule.webp';
+import FeuxRougeImg from '../../assets/feux-rouge.jpeg';
+import poubellesImg from '../../assets/poubelles.jpg';
 type FilterStatus = 'all' | ReportStatus;
 
 // Ejemplos de denuncias para demostración
@@ -19,7 +23,7 @@ const EXAMPLE_REPORTS: Report[] = [
     userId: 'demo',
     title: 'Luminaria rota en Av. Pedro Montt',
     description: 'La luminaria ubicada frente al número 1234 no funciona desde hace una semana, causando peligro para los peatones por las noches.',
-    photoUrl: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop',
+    photoUrl: luminariaImg,
     location: {
       lat: -33.0472,
       lng: -71.6127,
@@ -36,7 +40,7 @@ const EXAMPLE_REPORTS: Report[] = [
     userId: 'demo',
     title: 'Bache profundo en Calle Cumming',
     description: 'Hay un bache de aproximadamente 50cm de diámetro que puede dañar los vehículos. Se encuentra a la altura del supermercado.',
-    photoUrl: 'https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&auto=format&fit=crop',
+    photoUrl: NidPoulImg,
     location: {
       lat: -33.0450,
       lng: -71.6200,
@@ -53,7 +57,7 @@ const EXAMPLE_REPORTS: Report[] = [
     userId: 'demo',
     title: 'Acumulación de basura en Plaza Victoria',
     description: 'Los contenedores están desbordados y hay basura acumulada alrededor desde el fin de semana.',
-    photoUrl: 'https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&auto=format&fit=crop',
+    photoUrl: poubellesImg,
     location: {
       lat: -33.0378,
       lng: -71.6270,
@@ -70,7 +74,7 @@ const EXAMPLE_REPORTS: Report[] = [
     userId: 'demo',
     title: 'Semáforo intermitente en Av. Argentina',
     description: 'El semáforo del cruce con Calle Chacabuco está intermitente desde esta mañana, generando confusión en los conductores.',
-    photoUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&auto=format&fit=crop',
+    photoUrl: FeuxRougeImg,
     location: {
       lat: -33.0420,
       lng: -71.6180,
@@ -214,11 +218,6 @@ export function RequestsPage() {
                       alt={report.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
-                    {report.id.startsWith('ejemplo-') && (
-                      <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-                        Ejemplo
-                      </div>
-                    )}
                   </div>
                   <CardContent className="p-4">
                     <h3 className="font-semibold text-lg mb-2 line-clamp-2">

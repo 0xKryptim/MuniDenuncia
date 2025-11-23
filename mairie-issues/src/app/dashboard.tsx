@@ -25,55 +25,80 @@ export function DashboardPage() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 3);
 
+  const exampleReports = [
+  {
+    id: 'ejemplo-1',
+    userId: 'demo',
+    title: 'Luminaria rota en Av. Pedro Montt',
+    description:
+      'La luminaria ubicada frente al número 1234 no funciona desde hace una semana, causando peligro para los peatones por las noches.',
+    photoUrl:
+      'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.0472,
+      lng: -71.6127,
+      address:
+        'Av. Pedro Montt 1234, Valparaíso, Región de Valparaíso, Chile',
+    },
+    status: 'in_progress',
+    urgency: 'high',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    messages: [],
+  },
+  {
+    id: 'ejemplo-2',
+    userId: 'demo',
+    title: 'Bache profundo en Calle Cumming',
+    description:
+      'Hay un bache de aproximadamente 50cm de diámetro que puede dañar los vehículos. Se encuentra a la altura del supermercado.',
+    photoUrl:
+      'https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.045,
+      lng: -71.62,
+      address:
+        'Calle Cumming 567, Valparaíso, Región de Valparaíso, Chile',
+    },
+    status: 'in_review',
+    urgency: 'medium',
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    messages: [],
+  },
+];
+  
+  
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Panel Principal</h1>
+        <h1 className="text-3xl font-bold mb-2">Inicio</h1>
         <p className="text-muted-foreground">
           ¡Bienvenido de vuelta! Reporte problemas y haga seguimiento de sus solicitudes.
         </p>
       </div>
 
-      {/* Primary Action Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <Link to="/report" className="group">
-          <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                  <AlertCircle className="h-8 w-8" />
-                </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <CardTitle className="mb-2">Reportar un Problema</CardTitle>
-              <CardDescription className="text-base">
-                Envíe una nueva denuncia con fotos y detalles de ubicación
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </Link>
+{/* Primary Action Cards */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+  <Link to="/report" className="group">
+    <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
+      <CardHeader className="pb-4">
+        <div className="flex items-center justify-center">
+          <div className="p-4 rounded-lg bg-red-100 text-red-600 flex justify-center">
+            <AlertCircle className="h-10 w-10" />
+          </div>
+        </div>
+      </CardHeader>
 
-        <Link to="/requests" className="group">
-          <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-200">
-                  <FileText className="h-8 w-8" />
-                </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <CardTitle className="mb-2">Ver Mis Solicitudes</CardTitle>
-              <CardDescription className="text-base">
-                Haga seguimiento del estado de todos sus reportes enviados
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </Link>
-      </div>
+      <CardContent className="text-center">
+        <CardTitle className="mb-2">Reportar un Problema</CardTitle>
+        <CardDescription className="text-base">
+          Envíe una nueva denuncia con fotos y detalles de ubicación
+        </CardDescription>
+      </CardContent>
+    </Card>
+  </Link>
+</div>
 
       {/* Recent Requests Section */}
       <div>
@@ -97,7 +122,7 @@ export function DashboardPage() {
               </Card>
             ))}
           </div>
-        ) : recentReports.length === 0 ? (
+        ) : exampleReports.length === 0 ? (
           <Card className="border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-12">
               <div className="p-4 rounded-full bg-muted mb-4">
@@ -114,7 +139,7 @@ export function DashboardPage() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recentReports.map((report) => (
+            {exampleReports.map((report) => (
               <Link key={report.id} to={`/requests/${report.id}`}>
                 <Card className="h-full transition-all hover:shadow-lg cursor-pointer overflow-hidden">
                   <div className="relative h-48 overflow-hidden bg-muted">

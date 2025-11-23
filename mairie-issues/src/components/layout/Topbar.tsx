@@ -43,7 +43,7 @@ export function Topbar() {
             <FileText className="w-5 h-5 text-white" />
           </div>
           <h1 className="hidden sm:block text-lg font-semibold text-slate-900 dark:text-white">
-            Mairie
+            MuniDenuncia
           </h1>
         </div>
 
