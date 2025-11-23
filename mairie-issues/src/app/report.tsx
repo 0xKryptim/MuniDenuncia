@@ -17,7 +17,6 @@ import { PhotoDropzone } from '@/components/upload/PhotoDropzone';
 import type { Location, ReportUrgency } from '@/lib/types';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-
 export function ReportPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -38,11 +37,10 @@ export function ReportPage() {
 
   const createReportMutation = useMutation({
     mutationFn: async (data: ReportFormData) => {
-      if (!user?.id) throw new Error('User not authenticated');
+      if (!user?.id) throw new Error('Usuario no autenticado');
 
       setIsUploading(true);
       try {
-        // Create report
         const report = await api.createReport(
           {
             title: data.title,
@@ -54,11 +52,10 @@ export function ReportPage() {
           user.id
         );
 
-        // Create automatic system message
         await api.sendMessage(
           {
             reportId: report.id,
-            text: `Your report "${data.title}" has been submitted successfully. We'll review it shortly.`,
+            text: `Su denuncia "${data.title}" ha sido enviada exitosamente. La revisaremos pronto.`,
           },
           user.id
         );
@@ -69,11 +66,11 @@ export function ReportPage() {
       }
     },
     onSuccess: (report) => {
-      toast.success('Report submitted successfully!');
+      toast.success('¡Denuncia enviada exitosamente!');
       navigate(`/requests/${report.id}`);
     },
     onError: (error) => {
-      toast.error(error instanceof Error ? error.message : 'Failed to submit report');
+      toast.error(error instanceof Error ? error.message : 'Error al enviar la denuncia');
     },
   });
 
@@ -96,9 +93,9 @@ export function ReportPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Report a Problem</h1>
+        <h1 className="text-3xl font-bold mb-2">Reportar un Problema</h1>
         <p className="text-muted-foreground">
-          Submit an issue with photos and location details for the city to review.
+          Envíe una denuncia con fotos y detalles de ubicación para que la municipalidad la revise.
         </p>
       </div>
 
@@ -106,9 +103,9 @@ export function ReportPage() {
         {/* Section 1: Location */}
         <Card>
           <CardHeader>
-            <CardTitle>1. Location</CardTitle>
+            <CardTitle>1. Ubicación</CardTitle>
             <CardDescription>
-              Pin the exact location of the issue on the map
+              Marque la ubicación exacta del problema en el mapa
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -125,9 +122,9 @@ export function ReportPage() {
         {/* Section 2: Photo */}
         <Card>
           <CardHeader>
-            <CardTitle>2. Photo</CardTitle>
+            <CardTitle>2. Fotografía</CardTitle>
             <CardDescription>
-              Upload a clear photo of the problem (max 10MB, JPEG/PNG/WebP)
+              Suba una foto clara del problema (máx. 10MB, JPEG/PNG/WebP)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -145,19 +142,19 @@ export function ReportPage() {
         {/* Section 3: Details */}
         <Card>
           <CardHeader>
-            <CardTitle>3. Details</CardTitle>
+            <CardTitle>3. Detalles</CardTitle>
             <CardDescription>
-              Describe the issue clearly
+              Describa el problema claramente
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <Label htmlFor="title">
-                Title <span className="text-destructive">*</span>
+                Título <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="title"
-                placeholder="e.g., Broken streetlight on Main Street"
+                placeholder="ej. Luminaria rota en Calle Principal"
                 {...register('title')}
                 disabled={isSubmitting}
                 className="mt-1.5"
@@ -168,10 +165,10 @@ export function ReportPage() {
             </div>
 
             <div>
-              <Label htmlFor="description">Description (optional)</Label>
+              <Label htmlFor="description">Descripción (opcional)</Label>
               <Textarea
                 id="description"
-                placeholder="Add any additional details that might help..."
+                placeholder="Agregue cualquier detalle adicional que pueda ayudar..."
                 rows={4}
                 {...register('description')}
                 disabled={isSubmitting}
@@ -181,9 +178,10 @@ export function ReportPage() {
                 <p className="text-sm text-destructive mt-1">{errors.description.message}</p>
               )}
             </div>
+
             <div>
               <Label htmlFor="urgency">
-                Urgency Level <span className="text-destructive">*</span>
+                Nivel de Urgencia <span className="text-destructive">*</span>
               </Label>
               <Select
                 defaultValue=""
@@ -191,12 +189,12 @@ export function ReportPage() {
                 disabled={isSubmitting}
               >
                 <SelectTrigger id="urgency" className="mt-1.5">
-                  <SelectValue placeholder="Select urgency level" />
+                  <SelectValue placeholder="Seleccione el nivel de urgencia" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="low">Low - Not time sensitive</SelectItem>
-                  <SelectItem value="medium">Medium - Needs attention</SelectItem>
-                  <SelectItem value="high">High - Urgent safety concern</SelectItem>
+                  <SelectItem value="low">Baja - No es urgente</SelectItem>
+                  <SelectItem value="medium">Media - Necesita atención</SelectItem>
+                  <SelectItem value="high">Alta - Problema de seguridad urgente</SelectItem>
                 </SelectContent>
               </Select>
               {errors.urgency && (
@@ -214,10 +212,10 @@ export function ReportPage() {
             onClick={() => navigate(-1)}
             disabled={isSubmitting}
           >
-            Cancel
+            Cancelar
           </Button>
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit Report'}
+            {isSubmitting ? 'Enviando...' : 'Enviar Denuncia'}
           </Button>
         </div>
       </form>

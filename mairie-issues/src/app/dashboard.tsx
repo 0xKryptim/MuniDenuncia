@@ -28,9 +28,9 @@ export function DashboardPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-2">Panel Principal</h1>
         <p className="text-muted-foreground">
-          Welcome back! Report issues and track your requests.
+          ¡Bienvenido de vuelta! Reporte problemas y haga seguimiento de sus solicitudes.
         </p>
       </div>
 
@@ -47,9 +47,9 @@ export function DashboardPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <CardTitle className="mb-2">Report a Problem</CardTitle>
+              <CardTitle className="mb-2">Reportar un Problema</CardTitle>
               <CardDescription className="text-base">
-                Submit a new issue with photos and location details
+                Envíe una nueva denuncia con fotos y detalles de ubicación
               </CardDescription>
             </CardContent>
           </Card>
@@ -66,9 +66,9 @@ export function DashboardPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <CardTitle className="mb-2">View My Requests</CardTitle>
+              <CardTitle className="mb-2">Ver Mis Solicitudes</CardTitle>
               <CardDescription className="text-base">
-                Track the status of all your submitted reports
+                Haga seguimiento del estado de todos sus reportes enviados
               </CardDescription>
             </CardContent>
           </Card>
@@ -78,9 +78,9 @@ export function DashboardPage() {
       {/* Recent Requests Section */}
       <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold">Recent Requests</h2>
+          <h2 className="text-2xl font-semibold">Solicitudes Recientes</h2>
           <Button variant="ghost" asChild>
-            <Link to="/requests">View All</Link>
+            <Link to="/requests">Ver Todas</Link>
           </Button>
         </div>
 
@@ -103,12 +103,12 @@ export function DashboardPage() {
               <div className="p-4 rounded-full bg-muted mb-4">
                 <FileText className="h-8 w-8 text-muted-foreground" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">No requests yet</h3>
+              <h3 className="text-lg font-semibold mb-2">Aún no hay solicitudes</h3>
               <p className="text-muted-foreground text-center mb-6">
-                Report your first issue to get started
+                Reporte su primer problema para comenzar
               </p>
               <Button asChild>
-                <Link to="/report">Report a Problem</Link>
+                <Link to="/report">Reportar un Problema</Link>
               </Button>
             </CardContent>
           </Card>
@@ -129,7 +129,7 @@ export function DashboardPage() {
                     <div className="flex items-center justify-between">
                       <StatusChip status={report.status} />
                       <span className="text-sm text-muted-foreground">
-                        {new Date(report.createdAt).toLocaleDateString()}
+                        {new Date(report.createdAt).toLocaleDateString('es-CL')}
                       </span>
                     </div>
                   </CardContent>

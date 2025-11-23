@@ -12,12 +12,84 @@ import type { Report, ReportStatus } from '@/lib/types';
 
 type FilterStatus = 'all' | ReportStatus;
 
+// Ejemplos de denuncias para demostración
+const EXAMPLE_REPORTS: Report[] = [
+  {
+    id: 'ejemplo-1',
+    userId: 'demo',
+    title: 'Luminaria rota en Av. Pedro Montt',
+    description: 'La luminaria ubicada frente al número 1234 no funciona desde hace una semana, causando peligro para los peatones por las noches.',
+    photoUrl: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.0472,
+      lng: -71.6127,
+      address: 'Av. Pedro Montt 1234, Valparaíso, Región de Valparaíso, Chile'
+    },
+    status: 'in_progress',
+    urgency: 'high',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    messages: []
+  },
+  {
+    id: 'ejemplo-2',
+    userId: 'demo',
+    title: 'Bache profundo en Calle Cumming',
+    description: 'Hay un bache de aproximadamente 50cm de diámetro que puede dañar los vehículos. Se encuentra a la altura del supermercado.',
+    photoUrl: 'https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.0450,
+      lng: -71.6200,
+      address: 'Calle Cumming 567, Valparaíso, Región de Valparaíso, Chile'
+    },
+    status: 'in_review',
+    urgency: 'medium',
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    messages: []
+  },
+  {
+    id: 'ejemplo-3',
+    userId: 'demo',
+    title: 'Acumulación de basura en Plaza Victoria',
+    description: 'Los contenedores están desbordados y hay basura acumulada alrededor desde el fin de semana.',
+    photoUrl: 'https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.0378,
+      lng: -71.6270,
+      address: 'Plaza Victoria, Valparaíso, Región de Valparaíso, Chile'
+    },
+    status: 'resolved',
+    urgency: 'medium',
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    messages: []
+  },
+  {
+    id: 'ejemplo-4',
+    userId: 'demo',
+    title: 'Semáforo intermitente en Av. Argentina',
+    description: 'El semáforo del cruce con Calle Chacabuco está intermitente desde esta mañana, generando confusión en los conductores.',
+    photoUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&auto=format&fit=crop',
+    location: {
+      lat: -33.0420,
+      lng: -71.6180,
+      address: 'Av. Argentina con Calle Chacabuco, Valparaíso, Región de Valparaíso, Chile'
+    },
+    status: 'in_progress',
+    urgency: 'high',
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
+    messages: []
+  }
+];
+
 export function RequestsPage() {
   const { user } = useAuth();
   const [statusFilter, setStatusFilter] = useState<FilterStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data: reports = [], isLoading } = useQuery<Report[]>({
+  const { data: userReports = [], isLoading } = useQuery<Report[]>({
     queryKey: ['reports', user?.id],
     queryFn: async () => {
       if (!user?.id) return [];
@@ -26,14 +98,15 @@ export function RequestsPage() {
     enabled: !!user?.id,
   });
 
+  // Combinar reportes del usuario con ejemplos
+  const allReports = [...userReports, ...EXAMPLE_REPORTS];
+
   // Apply filters
-  const filteredReports = reports
+  const filteredReports = allReports
     .filter((report) => {
-      // Status filter
       if (statusFilter !== 'all' && report.status !== statusFilter) {
         return false;
       }
-      // Search filter
       if (searchQuery && !report.title.toLowerCase().includes(searchQuery.toLowerCase())) {
         return false;
       }
@@ -42,19 +115,19 @@ export function RequestsPage() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   const statusButtons: { value: FilterStatus; label: string }[] = [
-    { value: 'all', label: 'All' },
-    { value: 'submitted', label: 'Submitted' },
-    { value: 'in_review', label: 'In Review' },
-    { value: 'in_progress', label: 'In Progress' },
-    { value: 'resolved', label: 'Resolved' },
+    { value: 'all', label: 'Todas' },
+    { value: 'submitted', label: 'Enviadas' },
+    { value: 'in_review', label: 'En Revisión' },
+    { value: 'in_progress', label: 'En Progreso' },
+    { value: 'resolved', label: 'Resueltas' },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">My Requests</h1>
+        <h1 className="text-3xl font-bold mb-2">Mis Solicitudes</h1>
         <p className="text-muted-foreground">
-          View and track all your submitted reports
+          Vea y haga seguimiento de todas sus denuncias enviadas
         </p>
       </div>
 
@@ -78,7 +151,7 @@ export function RequestsPage() {
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search by title..."
+            placeholder="Buscar por título..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -108,17 +181,17 @@ export function RequestsPage() {
             </div>
             <h3 className="text-xl font-semibold mb-2">
               {searchQuery || statusFilter !== 'all'
-                ? 'No requests found'
-                : 'No requests yet'}
+                ? 'No se encontraron solicitudes'
+                : 'Aún no hay solicitudes'}
             </h3>
             <p className="text-muted-foreground text-center mb-6 max-w-sm">
               {searchQuery || statusFilter !== 'all'
-                ? 'Try adjusting your filters or search query'
-                : 'Get started by reporting your first issue'}
+                ? 'Intente ajustar sus filtros o búsqueda'
+                : 'Comience reportando su primer problema'}
             </p>
             {!searchQuery && statusFilter === 'all' && (
               <Button asChild>
-                <Link to="/report">Report a Problem</Link>
+                <Link to="/report">Reportar un Problema</Link>
               </Button>
             )}
           </CardContent>
@@ -126,7 +199,7 @@ export function RequestsPage() {
       ) : (
         <>
           <div className="mb-4 text-sm text-muted-foreground">
-            Showing {filteredReports.length} {filteredReports.length === 1 ? 'request' : 'requests'}
+            Mostrando {filteredReports.length} {filteredReports.length === 1 ? 'solicitud' : 'solicitudes'}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredReports.map((report) => (
@@ -141,6 +214,11 @@ export function RequestsPage() {
                       alt={report.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
+                    {report.id.startsWith('ejemplo-') && (
+                      <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                        Ejemplo
+                      </div>
+                    )}
                   </div>
                   <CardContent className="p-4">
                     <h3 className="font-semibold text-lg mb-2 line-clamp-2">
@@ -149,11 +227,11 @@ export function RequestsPage() {
                     <div className="flex items-center justify-between mb-3">
                       <StatusChip status={report.status} />
                       <span className="text-xs text-muted-foreground">
-                        {new Date(report.createdAt).toLocaleDateString()}
+                        {new Date(report.createdAt).toLocaleDateString('es-CL')}
                       </span>
                     </div>
                     <Button variant="outline" size="sm" className="w-full">
-                      View Details
+                      Ver Detalles
                     </Button>
                   </CardContent>
                 </Link>

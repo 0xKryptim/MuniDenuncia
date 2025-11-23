@@ -26,10 +26,10 @@ export function LoginPage() {
     setIsLoading(true);
     try {
       await login(data.email, data.password);
-      toast.success('Login successful!');
+      toast.success('¡Inicio de sesión exitoso!');
       navigate('/');
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Login failed. Please try again.';
+      const errorMessage = error instanceof Error ? error.message : 'Inicio de sesión fallido. Por favor intente nuevamente.';
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);
@@ -40,17 +40,17 @@ export function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-background">
       <div className="w-full max-w-md p-8 space-y-6 border rounded-lg shadow-md">
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold tracking-tight">Login</h1>
-          <p className="text-sm text-muted-foreground">Enter your credentials to access your account</p>
+          <h1 className="text-2xl font-bold tracking-tight">Iniciar Sesión</h1>
+          <p className="text-sm text-muted-foreground">Ingrese sus credenciales para acceder a su cuenta</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">Correo Electrónico</Label>
             <Input
               id="email"
               type="email"
-              placeholder="you@example.com"
+              placeholder="tu@ejemplo.cl"
               {...register('email')}
               disabled={isLoading}
               aria-invalid={!!errors.email}
@@ -61,7 +61,7 @@ export function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Contraseña</Label>
             <Input
               id="password"
               type="password"
@@ -76,7 +76,7 @@ export function LoginPage() {
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
           </Button>
         </form>
       </div>
