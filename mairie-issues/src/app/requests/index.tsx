@@ -42,19 +42,19 @@ export function RequestsPage() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   const statusButtons: { value: FilterStatus; label: string }[] = [
-    { value: 'all', label: 'All' },
-    { value: 'submitted', label: 'Submitted' },
-    { value: 'in_review', label: 'In Review' },
-    { value: 'in_progress', label: 'In Progress' },
-    { value: 'resolved', label: 'Resolved' },
+    { value: 'all', label: 'Todas' },
+    { value: 'submitted', label: 'Enviadas' },
+    { value: 'in_review', label: 'En Revisión' },
+    { value: 'in_progress', label: 'En Progreso' },
+    { value: 'resolved', label: 'Resueltas' },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">My Requests</h1>
+        <h1 className="text-3xl font-bold mb-2">Mis Solicitudes</h1>
         <p className="text-muted-foreground">
-          View and track all your submitted reports
+          Vea y rastree todos sus reportes enviados
         </p>
       </div>
 
@@ -78,7 +78,7 @@ export function RequestsPage() {
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search by title..."
+            placeholder="Buscar por título..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -108,17 +108,17 @@ export function RequestsPage() {
             </div>
             <h3 className="text-xl font-semibold mb-2">
               {searchQuery || statusFilter !== 'all'
-                ? 'No requests found'
-                : 'No requests yet'}
+                ? 'No se encontraron solicitudes'
+                : 'Sin solicitudes aún'}
             </h3>
             <p className="text-muted-foreground text-center mb-6 max-w-sm">
               {searchQuery || statusFilter !== 'all'
-                ? 'Try adjusting your filters or search query'
-                : 'Get started by reporting your first issue'}
+                ? 'Intente ajustar sus filtros o búsqueda'
+                : 'Comience reportando su primer problema'}
             </p>
             {!searchQuery && statusFilter === 'all' && (
               <Button asChild>
-                <Link to="/report">Report a Problem</Link>
+                <Link to="/report">Reportar un Problema</Link>
               </Button>
             )}
           </CardContent>
@@ -126,7 +126,7 @@ export function RequestsPage() {
       ) : (
         <>
           <div className="mb-4 text-sm text-muted-foreground">
-            Showing {filteredReports.length} {filteredReports.length === 1 ? 'request' : 'requests'}
+            Mostrando {filteredReports.length} {filteredReports.length === 1 ? 'solicitud' : 'solicitudes'}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredReports.map((report) => (
@@ -153,7 +153,7 @@ export function RequestsPage() {
                       </span>
                     </div>
                     <Button variant="outline" size="sm" className="w-full">
-                      View Details
+                      Ver Detalles
                     </Button>
                   </CardContent>
                 </Link>

@@ -47,11 +47,11 @@ export function formatRelativeTime(date: string): string {
  */
 export function getStatusLabel(status: ReportStatus): string {
   const labels: Record<ReportStatus, string> = {
-    submitted: 'Submitted',
-    in_review: 'In Review',
-    in_progress: 'In Progress',
-    resolved: 'Resolved',
-    rejected: 'Rejected',
+    submitted: 'Enviado',
+    in_review: 'En Revisión',
+    in_progress: 'En Progreso',
+    resolved: 'Resuelto',
+    rejected: 'Rechazado',
   };
   return labels[status];
 }

@@ -81,7 +81,7 @@ export function ChatThread({
         {allMessages.length === 0 ? (
           <div className="flex h-full items-center justify-center">
             <p className="text-sm text-muted-foreground">
-              No messages yet. Start a conversation!
+              Sin mensajes aún. ¡Inicia una conversación!
             </p>
           </div>
         ) : (
@@ -116,7 +116,7 @@ export function ChatThread({
                 >
                   {/* Sender label */}
                   <div className="mb-1 px-1 text-xs text-muted-foreground">
-                    {isUser ? 'You' : 'City'}
+                    {isUser ? 'Tú' : 'Ayuntamiento - Carlos Mendoza'}
                   </div>
 
                   {/* Message bubble */}
@@ -151,7 +151,7 @@ export function ChatThread({
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
+            placeholder="Escribe tu mensaje... (Enter para enviar, Shift+Enter para nueva línea)"
             className="min-h-[60px] max-h-[120px] resize-none"
             disabled={isSending}
           />
@@ -162,7 +162,7 @@ export function ChatThread({
             className="h-[60px] w-[60px] shrink-0"
           >
             <Send className="h-5 w-5" />
-            <span className="sr-only">Send message</span>
+            <span className="sr-only">Enviar mensaje</span>
           </Button>
         </div>
       </div>

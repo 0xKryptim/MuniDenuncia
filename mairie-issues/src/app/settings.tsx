@@ -18,16 +18,16 @@ export function SettingsPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Settings</h1>
-        <p className="text-muted-foreground">Manage your application preferences</p>
+        <h1 className="text-3xl font-bold mb-2">Configuración</h1>
+        <p className="text-muted-foreground">Administre las preferencias de la aplicación</p>
       </div>
 
       <div className="space-y-6">
         {/* Appearance */}
         <Card>
           <CardHeader>
-            <CardTitle>Appearance</CardTitle>
-            <CardDescription>Customize how the app looks</CardDescription>
+            <CardTitle>Apariencia</CardTitle>
+            <CardDescription>Personalice el aspecto de la aplicación</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
@@ -38,9 +38,9 @@ export function SettingsPage() {
                   <Sun className="h-5 w-5 text-muted-foreground mt-0.5" />
                 )}
                 <div>
-                  <Label className="text-base font-medium">Theme</Label>
+                  <Label className="text-base font-medium">Tema</Label>
                   <p className="text-sm text-muted-foreground">
-                    Current theme: {theme === 'dark' ? 'Dark' : 'Light'}
+                    Tema actual: {theme === 'dark' ? 'Oscuro' : 'Claro'}
                   </p>
                 </div>
               </div>
@@ -48,12 +48,12 @@ export function SettingsPage() {
                 {theme === 'dark' ? (
                   <>
                     <Sun className="mr-2 h-4 w-4" />
-                    Light Mode
+                    Modo Claro
                   </>
                 ) : (
                   <>
                     <Moon className="mr-2 h-4 w-4" />
-                    Dark Mode
+                    Modo Oscuro
                   </>
                 )}
               </Button>
@@ -64,20 +64,20 @@ export function SettingsPage() {
         {/* Language (Stub) */}
         <Card>
           <CardHeader>
-            <CardTitle>Language</CardTitle>
-            <CardDescription>Choose your preferred language</CardDescription>
+            <CardTitle>Idioma</CardTitle>
+            <CardDescription>Elija su idioma preferido</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="flex items-start gap-3">
                 <Globe className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
-                  <Label className="text-base font-medium">Display Language</Label>
-                  <p className="text-sm text-muted-foreground">Current language: English</p>
+                  <Label className="text-base font-medium">Idioma de Visualización</Label>
+                  <p className="text-sm text-muted-foreground">Idioma actual: Español</p>
                 </div>
               </div>
               <Button variant="outline" disabled>
-                Coming Soon
+                Próximamente
               </Button>
             </div>
           </CardContent>
@@ -86,22 +86,22 @@ export function SettingsPage() {
         {/* Notifications (Stub) */}
         <Card>
           <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>Manage how you receive updates</CardDescription>
+            <CardTitle>Notificaciones</CardTitle>
+            <CardDescription>Administre cómo recibe actualizaciones</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
               <div className="flex items-start gap-3">
                 <Bell className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
-                  <Label className="text-base font-medium">Email Notifications</Label>
+                  <Label className="text-base font-medium">Notificaciones por Correo</Label>
                   <p className="text-sm text-muted-foreground">
-                    Receive updates about your reports via email
+                    Reciba actualizaciones sobre sus reportes por correo
                   </p>
                 </div>
               </div>
               <Button variant="outline" size="sm" disabled>
-                Coming Soon
+                Próximamente
               </Button>
             </div>
 
@@ -109,14 +109,14 @@ export function SettingsPage() {
               <div className="flex items-start gap-3">
                 <Bell className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
-                  <Label className="text-base font-medium">Push Notifications</Label>
+                  <Label className="text-base font-medium">Notificaciones Push</Label>
                   <p className="text-sm text-muted-foreground">
-                    Get real-time updates on your device
+                    Reciba actualizaciones en tiempo real en su dispositivo
                   </p>
                 </div>
               </div>
               <Button variant="outline" size="sm" disabled>
-                Coming Soon
+                Próximamente
               </Button>
             </div>
           </CardContent>
@@ -125,28 +125,28 @@ export function SettingsPage() {
         {/* System Information */}
         <Card>
           <CardHeader>
-            <CardTitle>System Information</CardTitle>
-            <CardDescription>Technical details about the app</CardDescription>
+            <CardTitle>Información del Sistema</CardTitle>
+            <CardDescription>Detalles técnicos de la aplicación</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-start gap-3">
               <Database className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div className="flex-1">
-                <Label className="text-base font-medium">Data Adapter</Label>
+                <Label className="text-base font-medium">Adaptador de Datos</Label>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge variant={adapterType === 'supabase' ? 'default' : 'secondary'}>
                     {adapterType === 'supabase' ? 'Supabase' : 'Mock'}
                   </Badge>
                   {adapterType === 'supabase' && isRealtimeEnabled && (
                     <Badge variant="outline" className="text-xs">
-                      Realtime Enabled
+                      Tiempo Real Habilitado
                     </Badge>
                   )}
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">
                   {adapterType === 'supabase'
-                    ? 'Using Supabase for data persistence and authentication'
-                    : 'Using mock data for development and testing'}
+                    ? 'Usando Supabase para persistencia de datos y autenticación'
+                    : 'Usando datos de prueba para desarrollo y testing'}
                 </p>
               </div>
             </div>
@@ -154,9 +154,9 @@ export function SettingsPage() {
             <div className="flex items-start gap-3">
               <Info className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div>
-                <Label className="text-base font-medium">App Version</Label>
+                <Label className="text-base font-medium">Versión de la App</Label>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Version {appVersion}
+                  Versión {appVersion}
                 </p>
               </div>
             </div>
@@ -164,9 +164,9 @@ export function SettingsPage() {
             <div className="flex items-start gap-3">
               <Info className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div>
-                <Label className="text-base font-medium">Build Environment</Label>
+                <Label className="text-base font-medium">Entorno de Compilación</Label>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {import.meta.env.MODE === 'production' ? 'Production' : 'Development'}
+                  {import.meta.env.MODE === 'production' ? 'Producción' : 'Desarrollo'}
                 </p>
               </div>
             </div>
@@ -177,12 +177,12 @@ export function SettingsPage() {
         <Card className="border-muted bg-muted/20">
           <CardContent className="pt-6">
             <div className="text-center space-y-2">
-              <h3 className="font-semibold">Mairie Issues</h3>
+              <h3 className="font-semibold">Portal Ciudadano</h3>
               <p className="text-sm text-muted-foreground">
-                A citizen reporting platform for municipal issues
+                Una plataforma de reportes ciudadanos para problemas municipales
               </p>
               <p className="text-xs text-muted-foreground">
-                Built with React, TypeScript, and TailwindCSS
+                Construido con React, TypeScript y TailwindCSS
               </p>
             </div>
           </CardContent>

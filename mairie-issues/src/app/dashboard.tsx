@@ -28,48 +28,32 @@ export function DashboardPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
         <p className="text-muted-foreground">
-          Welcome back! Report issues and track your requests.
+          ¡Bienvenido de nuevo! Reporte problemas y rastree sus solicitudes.
         </p>
       </div>
 
-      {/* Primary Action Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <Link to="/report" className="group">
-          <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
+      {/* Primary Action - Centered and Large */}
+      <div className="flex justify-center mb-12">
+        <Link to="/report" className="group w-full max-w-lg">
+          <Card className="transition-all hover:shadow-xl hover:scale-105 hover:border-primary cursor-pointer bg-gradient-to-r from-primary/5 to-primary/10">
             <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                  <AlertCircle className="h-8 w-8" />
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 rounded-full bg-primary/20 text-primary mb-4">
+                  <AlertCircle className="h-12 w-12" />
                 </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <CardTitle className="text-2xl mb-3">Reportar un Problema</CardTitle>
+                <CardDescription className="text-base">
+                  Envíe un nuevo problema con fotos y detalles de ubicación
+                </CardDescription>
               </div>
             </CardHeader>
-            <CardContent>
-              <CardTitle className="mb-2">Report a Problem</CardTitle>
-              <CardDescription className="text-base">
-                Submit a new issue with photos and location details
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/requests" className="group">
-          <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-200">
-                  <FileText className="h-8 w-8" />
-                </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <CardContent className="pt-0">
+              <div className="flex items-center justify-center gap-2 text-primary">
+                <span className="font-medium">Comenzar</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </div>
-            </CardHeader>
-            <CardContent>
-              <CardTitle className="mb-2">View My Requests</CardTitle>
-              <CardDescription className="text-base">
-                Track the status of all your submitted reports
-              </CardDescription>
             </CardContent>
           </Card>
         </Link>
@@ -78,9 +62,9 @@ export function DashboardPage() {
       {/* Recent Requests Section */}
       <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold">Recent Requests</h2>
+          <h2 className="text-2xl font-semibold">Solicitudes Recientes</h2>
           <Button variant="ghost" asChild>
-            <Link to="/requests">View All</Link>
+            <Link to="/requests">Ver Todas</Link>
           </Button>
         </div>
 
@@ -103,12 +87,12 @@ export function DashboardPage() {
               <div className="p-4 rounded-full bg-muted mb-4">
                 <FileText className="h-8 w-8 text-muted-foreground" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">No requests yet</h3>
+              <h3 className="text-lg font-semibold mb-2">Sin solicitudes aún</h3>
               <p className="text-muted-foreground text-center mb-6">
-                Report your first issue to get started
+                Reporte su primer problema para comenzar
               </p>
               <Button asChild>
-                <Link to="/report">Report a Problem</Link>
+                <Link to="/report">Reportar un Problema</Link>
               </Button>
             </CardContent>
           </Card>

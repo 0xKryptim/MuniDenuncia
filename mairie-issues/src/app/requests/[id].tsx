@@ -1,6 +1,8 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, MapPin, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Clock, Share2, Twitter, Facebook, MessageCircle, Link2, Check } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import { api } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +13,7 @@ import type { Report, Message } from '@/lib/types';
 export function RequestDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const { data: report, isLoading } = useQuery<Report>({
     queryKey: ['report', id],
@@ -20,6 +23,39 @@ export function RequestDetailPage() {
     },
     enabled: !!id,
   });
+
+  // Social sharing functions
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+  const shareOnTwitter = () => {
+    if (!report) return;
+    const text = `He reportado un problema en mi comunidad: ${report.title} #MuniDenuncia`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+    window.open(url, '_blank', 'width=550,height=450');
+  };
+
+  const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    window.open(url, '_blank', 'width=550,height=450');
+  };
+
+  const shareOnWhatsApp = () => {
+    if (!report) return;
+    const text = `Mira mi reporte en MuniDenuncia: ${report.title} - ${shareUrl}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedLink(true);
+      toast.success('Enlace copiado al portapapeles');
+      setTimeout(() => setCopiedLink(false), 2000);
+    } catch (error) {
+      toast.error('Error al copiar el enlace');
+    }
+  };
 
   if (isLoading) {
     return (
@@ -39,11 +75,11 @@ export function RequestDetailPage() {
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         <Card>
           <CardContent className="py-16 text-center">
-            <h2 className="text-xl font-semibold mb-2">Report not found</h2>
+            <h2 className="text-xl font-semibold mb-2">Reporte no encontrado</h2>
             <p className="text-muted-foreground mb-4">
-              The report you're looking for doesn't exist or has been removed.
+              El reporte que busca no existe o ha sido eliminado.
             </p>
-            <Button onClick={() => navigate('/requests')}>Back to Requests</Button>
+            <Button onClick={() => navigate('/requests')}>Volver a Solicitudes</Button>
           </CardContent>
         </Card>
       </div>
@@ -51,7 +87,7 @@ export function RequestDetailPage() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -62,7 +98,7 @@ export function RequestDetailPage() {
 
   // Get status history from messages or create from report
   const statusHistory = [
-    { status: 'submitted', date: report.createdAt, label: 'Submitted' },
+    { status: 'submitted', date: report.createdAt, label: 'Enviado' },
     ...(report.status !== 'submitted'
       ? [{ status: report.status, date: report.updatedAt, label: getStatusLabel(report.status) }]
       : []),
@@ -74,7 +110,7 @@ export function RequestDetailPage() {
       <Button variant="ghost" size="sm" asChild className="mb-6">
         <Link to="/requests">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Requests
+          Volver a Solicitudes
         </Link>
       </Button>
 
@@ -86,12 +122,12 @@ export function RequestDetailPage() {
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-1.5">
                 <Calendar className="h-4 w-4" />
-                <span>Created: {formatDate(report.createdAt)}</span>
+                <span>Creado: {formatDate(report.createdAt)}</span>
               </div>
               {report.updatedAt !== report.createdAt && (
                 <div className="flex items-center gap-1.5">
                   <Clock className="h-4 w-4" />
-                  <span>Updated: {formatDate(report.updatedAt)}</span>
+                  <span>Actualizado: {formatDate(report.updatedAt)}</span>
                 </div>
               )}
             </div>
@@ -102,7 +138,7 @@ export function RequestDetailPage() {
         {/* Status Timeline */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Progress</CardTitle>
+            <CardTitle className="text-base">Progreso</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2 overflow-x-auto pb-2">
@@ -130,7 +166,7 @@ export function RequestDetailPage() {
           {/* Photo */}
           <Card>
             <CardHeader>
-              <CardTitle>Photo</CardTitle>
+              <CardTitle>Foto</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="relative rounded-lg overflow-hidden bg-muted">
@@ -147,7 +183,7 @@ export function RequestDetailPage() {
           {report.description && (
             <Card>
               <CardHeader>
-                <CardTitle>Description</CardTitle>
+                <CardTitle>Descripción</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground whitespace-pre-wrap">{report.description}</p>
@@ -158,7 +194,7 @@ export function RequestDetailPage() {
           {/* Messages/Chat Thread */}
           <Card>
             <CardHeader>
-              <CardTitle>Activity</CardTitle>
+              <CardTitle>Actividad</CardTitle>
             </CardHeader>
             <CardContent>
               {report.messages && report.messages.length > 0 ? (
@@ -181,7 +217,7 @@ export function RequestDetailPage() {
                       >
                         <p className="text-sm">{message.text}</p>
                         <span className="text-xs opacity-70 mt-1 block">
-                          {new Date(message.createdAt).toLocaleTimeString('en-US', {
+                          {new Date(message.createdAt).toLocaleTimeString('es-ES', {
                             hour: '2-digit',
                             minute: '2-digit',
                           })}
@@ -191,7 +227,7 @@ export function RequestDetailPage() {
                   ))}
                 </div>
               ) : (
-                <p className="text-muted-foreground text-center py-8">No activity yet</p>
+                <p className="text-muted-foreground text-center py-8">Sin actividad aún</p>
               )}
             </CardContent>
           </Card>
@@ -202,7 +238,7 @@ export function RequestDetailPage() {
           {/* Location */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Location</CardTitle>
+              <CardTitle className="text-base">Ubicación</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -232,28 +268,85 @@ export function RequestDetailPage() {
             </CardContent>
           </Card>
 
+          {/* Social Sharing */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Share2 className="h-4 w-4" />
+                Compartir en Redes Sociales
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Comparte tu reporte para aumentar la visibilidad y el apoyo de la comunidad
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shareOnTwitter}
+                  className="flex items-center gap-2"
+                >
+                  <Twitter className="h-4 w-4" />
+                  Twitter
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shareOnFacebook}
+                  className="flex items-center gap-2"
+                >
+                  <Facebook className="h-4 w-4" />
+                  Facebook
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shareOnWhatsApp}
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={copyLink}
+                  className="flex items-center gap-2"
+                >
+                  {copiedLink ? (
+                    <Check className="h-4 w-4" />
+                  ) : (
+                    <Link2 className="h-4 w-4" />
+                  )}
+                  {copiedLink ? 'Copiado' : 'Copiar'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Report Info */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Report Information</CardTitle>
+              <CardTitle className="text-base">Información del Reporte</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <div>
-                <span className="text-muted-foreground">Report ID:</span>
+                <span className="text-muted-foreground">ID del Reporte:</span>
                 <p className="font-mono text-xs mt-1">{report.id}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Status:</span>
+                <span className="text-muted-foreground">Estado:</span>
                 <div className="mt-1">
                   <StatusChip status={report.status} />
                 </div>
               </div>
               <div>
-                <span className="text-muted-foreground">Created:</span>
+                <span className="text-muted-foreground">Creado:</span>
                 <p className="mt-1">{formatDate(report.createdAt)}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Last Updated:</span>
+                <span className="text-muted-foreground">Última Actualización:</span>
                 <p className="mt-1">{formatDate(report.updatedAt)}</p>
               </div>
             </CardContent>
@@ -266,11 +359,11 @@ export function RequestDetailPage() {
 
 function getStatusLabel(status: string): string {
   const labels: Record<string, string> = {
-    submitted: 'Submitted',
-    in_review: 'In Review',
-    in_progress: 'In Progress',
-    resolved: 'Resolved',
-    rejected: 'Rejected',
+    submitted: 'Enviado',
+    in_review: 'En Revisión',
+    in_progress: 'En Progreso',
+    resolved: 'Resuelto',
+    rejected: 'Rechazado',
   };
   return labels[status] || status;
 }

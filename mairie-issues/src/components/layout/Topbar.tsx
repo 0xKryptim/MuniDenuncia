@@ -39,11 +39,11 @@ export function Topbar() {
       <div className="h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: App Logo/Name */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
             <FileText className="w-5 h-5 text-white" />
           </div>
           <h1 className="hidden sm:block text-lg font-semibold text-slate-900 dark:text-white">
-            Mairie
+            MuniDenuncia
           </h1>
         </div>
 
@@ -90,7 +90,7 @@ export function Topbar() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate('/account')}>
-                <span className="text-sm">Account Settings</span>
+                <span className="text-sm">Configuración de Cuenta</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -98,7 +98,7 @@ export function Topbar() {
                 className="text-red-600 dark:text-red-400 focus:text-red-600 dark:focus:text-red-400"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                <span className="text-sm">Logout</span>
+                <span className="text-sm">Cerrar Sesión</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

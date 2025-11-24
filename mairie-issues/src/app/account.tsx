@@ -13,10 +13,10 @@ export function AccountPage() {
   const handleLogout = async () => {
     try {
       await logout();
-      toast.success('Logged out successfully');
+      toast.success('Sesión cerrada exitosamente');
       navigate('/login');
     } catch (error) {
-      toast.error('Failed to logout');
+      toast.error('Error al cerrar sesión');
     }
   };
 
@@ -25,7 +25,7 @@ export function AccountPage() {
       <div className="container mx-auto px-4 py-8 max-w-3xl">
         <Card>
           <CardContent className="py-16 text-center">
-            <p className="text-muted-foreground">Loading user information...</p>
+            <p className="text-muted-foreground">Cargando información del usuario...</p>
           </CardContent>
         </Card>
       </div>
@@ -45,16 +45,16 @@ export function AccountPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Account</h1>
-        <p className="text-muted-foreground">Manage your account information</p>
+        <h1 className="text-3xl font-bold mb-2">Cuenta</h1>
+        <p className="text-muted-foreground">Administre la información de su cuenta</p>
       </div>
 
       <div className="space-y-6">
         {/* Profile Card */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Your personal information</CardDescription>
+            <CardTitle>Perfil</CardTitle>
+            <CardDescription>Su información personal</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-start gap-6">
@@ -70,7 +70,7 @@ export function AccountPage() {
                   <div className="flex items-start gap-3">
                     <UserIcon className="h-5 w-5 text-muted-foreground mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Name</p>
+                      <p className="text-sm text-muted-foreground">Nombre</p>
                       <p className="font-medium">{user.name}</p>
                     </div>
                   </div>
@@ -79,7 +79,7 @@ export function AccountPage() {
                 <div className="flex items-start gap-3">
                   <Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
+                    <p className="text-sm text-muted-foreground">Correo</p>
                     <p className="font-medium">{user.email}</p>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ export function AccountPage() {
                 <div className="flex items-start gap-3">
                   <UserIcon className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
-                    <p className="text-sm text-muted-foreground">User ID</p>
+                    <p className="text-sm text-muted-foreground">ID de Usuario</p>
                     <p className="font-mono text-sm">{user.id}</p>
                   </div>
                 </div>
@@ -99,44 +99,44 @@ export function AccountPage() {
         {/* Actions Card */}
         <Card>
           <CardHeader>
-            <CardTitle>Account Actions</CardTitle>
-            <CardDescription>Manage your account settings</CardDescription>
+            <CardTitle>Acciones de Cuenta</CardTitle>
+            <CardDescription>Administre la configuración de su cuenta</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between p-4 border rounded-lg">
               <div>
-                <h3 className="font-medium mb-1">Sign Out</h3>
+                <h3 className="font-medium mb-1">Cerrar Sesión</h3>
                 <p className="text-sm text-muted-foreground">
-                  Sign out of your account on this device
+                  Cierre sesión en este dispositivo
                 </p>
               </div>
               <Button variant="destructive" onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
-                Logout
+                Cerrar Sesión
               </Button>
             </div>
 
             <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/50">
               <div>
-                <h3 className="font-medium mb-1">Edit Profile</h3>
+                <h3 className="font-medium mb-1">Editar Perfil</h3>
                 <p className="text-sm text-muted-foreground">
-                  Update your name, email, and avatar
+                  Actualice su nombre, correo y avatar
                 </p>
               </div>
               <Button variant="outline" disabled>
-                Coming Soon
+                Próximamente
               </Button>
             </div>
 
             <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/50">
               <div>
-                <h3 className="font-medium mb-1">Change Password</h3>
+                <h3 className="font-medium mb-1">Cambiar Contraseña</h3>
                 <p className="text-sm text-muted-foreground">
-                  Update your account password
+                  Actualice la contraseña de su cuenta
                 </p>
               </div>
               <Button variant="outline" disabled>
-                Coming Soon
+                Próximamente
               </Button>
             </div>
           </CardContent>
@@ -146,7 +146,7 @@ export function AccountPage() {
         <Card className="border-muted bg-muted/20">
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground text-center">
-              Need help with your account? Contact support at{' '}
+              ¿Necesita ayuda con su cuenta? Contacte soporte en{' '}
               <a href="mailto:support@mairie.local" className="text-primary hover:underline">
                 support@mairie.local
               </a>

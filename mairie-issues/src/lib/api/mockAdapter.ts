@@ -11,13 +11,13 @@ const reports: Report[] = [
   {
     id: '1',
     userId: '1',
-    title: 'Broken streetlight on Main Street',
-    description: 'The streetlight at the corner of Main St and Oak Ave has been out for the past week. It makes the intersection very dark and unsafe at night.',
+    title: 'Farola rota en la Calle Principal',
+    description: 'La farola en la esquina de Calle Principal y Av. Robles ha estado apagada durante la última semana. Hace que la intersección sea muy oscura e insegura por la noche.',
     photoUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
     location: {
       lat: 48.8566,
       lng: 2.3522,
-      address: '123 Main Street, Paris 75001'
+      address: '123 Calle Principal, París 75001'
     },
     status: 'in_progress',
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
@@ -27,7 +27,7 @@ const reports: Report[] = [
         id: '1',
         reportId: '1',
         sender: 'city',
-        text: 'We have received your request. Our team will review it shortly.',
+        text: 'Hemos recibido su solicitud. Nuestro equipo la revisará pronto.',
         createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
         system: true
       },
@@ -35,7 +35,7 @@ const reports: Report[] = [
         id: '2',
         reportId: '1',
         sender: 'city',
-        text: 'Thank you for reporting this issue. Our maintenance team has been dispatched to fix the streetlight.',
+        text: 'Gracias por reportar este problema. Nuestro equipo de mantenimiento ha sido enviado para reparar la farola.',
         createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
         system: false
       },
@@ -43,7 +43,7 @@ const reports: Report[] = [
         id: '3',
         reportId: '1',
         sender: 'user',
-        text: 'Thank you for the quick response! When do you expect it to be fixed?',
+        text: '¡Gracias por la rápida respuesta! ¿Cuándo esperan que esté reparada?',
         createdAt: new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString(),
         system: false
       },
@@ -51,7 +51,7 @@ const reports: Report[] = [
         id: '4',
         reportId: '1',
         sender: 'city',
-        text: 'We expect the repair to be completed within 2-3 business days.',
+        text: 'Esperamos que la reparación se complete en 2-3 días hábiles.',
         createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
         system: false
       }
@@ -60,13 +60,13 @@ const reports: Report[] = [
   {
     id: '2',
     userId: '1',
-    title: 'Pothole on Rue de la Paix',
-    description: 'Large pothole causing damage to vehicles. Very dangerous for cyclists.',
+    title: 'Bache en la Rue de la Paix',
+    description: 'Bache grande que causa daños a vehículos. Muy peligroso para ciclistas.',
     photoUrl: 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=800',
     location: {
       lat: 48.8606,
       lng: 2.3376,
-      address: '45 Rue de la Paix, Paris 75002'
+      address: '45 Rue de la Paix, París 75002'
     },
     status: 'submitted',
     createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
@@ -76,7 +76,7 @@ const reports: Report[] = [
         id: '5',
         reportId: '2',
         sender: 'city',
-        text: 'We have received your request. Our team will review it shortly.',
+        text: 'Hemos recibido su solicitud. Nuestro equipo la revisará pronto.',
         createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
         system: true
       }
@@ -85,13 +85,13 @@ const reports: Report[] = [
   {
     id: '3',
     userId: '1',
-    title: 'Graffiti on public building',
-    description: 'Offensive graffiti on the side of the library building needs to be removed.',
+    title: 'Grafiti en edificio público',
+    description: 'Grafiti ofensivo en el costado del edificio de la biblioteca necesita ser removido.',
     photoUrl: 'https://images.unsplash.com/photo-1558470598-a5dda9640f68?w=800',
     location: {
       lat: 48.8584,
       lng: 2.2945,
-      address: '789 Avenue des Champs, Paris 75008'
+      address: '789 Avenue des Champs, París 75008'
     },
     status: 'resolved',
     createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
@@ -101,7 +101,7 @@ const reports: Report[] = [
         id: '6',
         reportId: '3',
         sender: 'city',
-        text: 'We have received your request. Our team will review it shortly.',
+        text: 'Hemos recibido su solicitud. Nuestro equipo la revisará pronto.',
         createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
         system: true
       },
@@ -109,7 +109,7 @@ const reports: Report[] = [
         id: '7',
         reportId: '3',
         sender: 'city',
-        text: 'Our cleaning crew has been dispatched to remove the graffiti.',
+        text: 'Nuestro equipo de limpieza ha sido enviado para remover el grafiti.',
         createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
         system: false
       },
@@ -117,7 +117,7 @@ const reports: Report[] = [
         id: '8',
         reportId: '3',
         sender: 'city',
-        text: 'The graffiti has been successfully removed. Thank you for reporting this issue.',
+        text: 'El grafiti ha sido removido exitosamente. Gracias por reportar este problema.',
         createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
         system: false
       },
@@ -125,7 +125,7 @@ const reports: Report[] = [
         id: '9',
         reportId: '3',
         sender: 'user',
-        text: 'Great work! Thank you for the quick action.',
+        text: '¡Excelente trabajo! Gracias por la rápida acción.',
         createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
         system: false
       }
@@ -139,7 +139,7 @@ const MOCK_USERS: Record<string, { user: User; password: string }> = {
     user: {
       id: '1',
       email: 'user@example.com',
-      name: 'Jean Dupont',
+      name: 'María García',
       avatarUrl: undefined,
     },
     password: 'password123',
@@ -152,7 +152,7 @@ export const mockAdapter: DataAdapter = {
 
     const userRecord = MOCK_USERS[credentials.email];
     if (!userRecord || userRecord.password !== credentials.password) {
-      throw new Error('Invalid email or password');
+      throw new Error('Correo electrónico o contraseña inválidos');
     }
 
     currentUser = userRecord.user;
@@ -189,7 +189,7 @@ export const mockAdapter: DataAdapter = {
   async getReport(id: string): Promise<Report> {
     await new Promise((resolve) => setTimeout(resolve, 200));
     const report = reports.find((r) => r.id === id);
-    if (!report) throw new Error('Report not found');
+    if (!report) throw new Error('Reporte no encontrado');
     return report;
   },
 
@@ -204,7 +204,7 @@ export const mockAdapter: DataAdapter = {
       id: String(messageIdCounter++),
       reportId,
       sender: 'city',
-      text: 'We have received your request. Our team will review it shortly.',
+      text: 'Hemos recibido su solicitud. Nuestro equipo la revisará pronto.',
       createdAt: now,
       system: true,
     };
@@ -234,7 +234,7 @@ export const mockAdapter: DataAdapter = {
   async getMessages(reportId: string): Promise<Message[]> {
     await new Promise((resolve) => setTimeout(resolve, 200));
     const report = reports.find((r) => r.id === reportId);
-    if (!report) throw new Error('Report not found');
+    if (!report) throw new Error('Reporte no encontrado');
     return report.messages;
   },
 
@@ -242,7 +242,7 @@ export const mockAdapter: DataAdapter = {
     await new Promise((resolve) => setTimeout(resolve, 300));
 
     const report = reports.find((r) => r.id === input.reportId);
-    if (!report) throw new Error('Report not found');
+    if (!report) throw new Error('Reporte no encontrado');
 
     const message: Message = {
       id: String(messageIdCounter++),

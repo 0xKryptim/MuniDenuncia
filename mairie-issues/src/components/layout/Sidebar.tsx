@@ -19,20 +19,20 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: 'Home', path: '/', icon: <Home className="w-5 h-5" /> },
+  { label: 'Inicio', path: '/', icon: <Home className="w-5 h-5" /> },
   {
-    label: 'New Report',
+    label: 'Nuevo Reporte',
     path: '/report',
     icon: <FileText className="w-5 h-5" />,
   },
   {
-    label: 'My Requests',
+    label: 'Mis Solicitudes',
     path: '/requests',
     icon: <AlertCircle className="w-5 h-5" />,
   },
-  { label: 'Account', path: '/account', icon: <User className="w-5 h-5" /> },
+  { label: 'Cuenta', path: '/account', icon: <User className="w-5 h-5" /> },
   {
-    label: 'Settings',
+    label: 'Configuración',
     path: '/settings',
     icon: <Settings className="w-5 h-5" />,
   },
@@ -69,21 +69,6 @@ export function Sidebar() {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* App Logo/Name */}
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-              <FileText className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
-              Mairie
-            </h1>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Issue Tracker
-          </p>
-        </div>
-
         {/* Navigation Links */}
         <nav className="px-3 py-4 space-y-2">
           {navLinks.map((link) => (
